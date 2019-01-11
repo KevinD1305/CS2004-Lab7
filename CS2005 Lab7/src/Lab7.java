@@ -25,12 +25,12 @@ public class Lab7
 		System.out.println("This is the Minimum Spanning Tree!");
 		*///Exercise 2
 		Random rand = new Random();
-		int n = rand.nextInt(5 - 3 + 1) + 3;
-		System.out.println(RandomArray(n));
+		int n = rand.nextInt(5 - 3 + 1) + 3;//The amount of nodes/vertices
+		PrintArray(RandomArray(n));
 	}
 
 	
-	public static void PrintArray(double matrix [][]) 
+	public static void PrintArray(double matrix [][]) //Replace Ints to double when creating a double, but since Exercise 3 asks for natural integer
 	{
 				for (int i = 0; i < matrix.length; i++) 
 				{
@@ -41,32 +41,33 @@ public class Lab7
 				}	
 	}
 	
-	private static /*ArrayList<Integer> RandomArray(int n)*/ double [][] RandomArray(int n)
+	private static double[][] RandomArray(int n)
 	{
-
-		/*ArrayList<Integer> randomarray = new ArrayList<Integer>();
-		Random rand = new Random();
-		rand.setSeed(System.currentTimeMillis());
-
-		for(int i = 0; i<n; i++)
+			double RandomArray[][] = new double [n][n]; //Declaring an array with n by n elements.
+			int row; int column;
+			Random rand = new Random(); //Initialising the random function
+			rand.setSeed(System.currentTimeMillis());
+			
+			for(row = 0; row < n; row++)
 			{
-				Integer r = Math.abs(rand.nextInt() % 101);
-				randomarray.add(r);
-			}
-		
-		return randomarray;
-		*/
-		double [][] g = new double [n][n];
-		Random random = new Random();
-		for (int i = 0; i < n; i++)
-		{
-				for (int j = 0; j < n; j++)
+				for(column = 0; column < n; column++)
 				{
-					g[i][j] = g[j][i];
-					g[i][j] = random.nextInt(100);
+					if (row == column) //If row = column , 0,0, 1,1, 2,2 then it cannot have a route with itself.
+					{
+						RandomArray[row][column] = 0;
+					}
+					
+					else 
+					{
+						int r = Math.abs(rand.nextInt() % 101); //This keeps the random value below 100.
+						RandomArray[row][column] = r; //To make the array symmetrical I inverse the row and column and make it equal to the same random variable
+						RandomArray[column][row] = r; 
+					}
 				}
+				
+			}
+			return (RandomArray);
 		}
-	return g;
-	}
+	
 }
 	
